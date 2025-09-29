@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Id": "PutObjectPolicy",
+  "Statement": [
+    {
+      "Sid": "DenyUnEncryptedObjectUploads",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::test4234234dvdvvs/*",
+      "Condition": {
+        "Null": {
+          "s3:x-amz-server-side-encryption": "true"
+        }
+      }
+    },
+    {
+      "Sid": "EnforceAES256Encryption",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::test4234234dvdvvs/*",
+      "Condition": {
+        "StringNotEquals": {
+          "s3:x-amz-server-side-encryption": "AES256"
+        }
+      }
+    }
+  ]
+}
